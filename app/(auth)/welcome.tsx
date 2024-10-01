@@ -1,14 +1,14 @@
 import React from "react";
 import { SafeAreaView, Text, View } from "react-native";
 
-const Welcome = () => {
+const Onboarding = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>Welcome</Text>
+        <Text>Onboarding </Text>
       </View>
     </SafeAreaView>
   );
 };
 
-export default Welcome;
+export default Onboarding;

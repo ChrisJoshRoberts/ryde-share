@@ -1,5 +1,5 @@
-import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native';
+import React from "react";
+import { SafeAreaView, Text, View } from "react-native";
 
 const Chat = () => {
   return (
@@ -9,6 +9,6 @@ const Chat = () => {
       </View>
     </SafeAreaView>
   );
-}
+};
 
-export default Chat
+export default Chat;
