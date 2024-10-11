@@ -1,9 +1,14 @@
 import InputField from "@/components/InputField";
-import { images } from "@/constants";
+import { icons, images } from "@/constants";
 import React from "react";
 import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 const SignUp = () => {
+  const [form, setForm] = uFeState({
+    name: "",
+    email: "",
+    password: "",
+  });
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -14,7 +19,13 @@ const SignUp = () => {
           </Text>
         </View>
         <View className="p-5">
-          <InputField />
+          <InputField
+            label="Name"
+            placeholder="Enter your name"
+            icon={icons.person}
+            value={form.name}
+            onChangeText={(value) => setForm({ ...form, name: value })}
+          />
         </View>
       </View>
     </ScrollView>
