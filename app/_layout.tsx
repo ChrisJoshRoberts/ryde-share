@@ -1,9 +1,13 @@
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-
+import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const publishableKey: string | undefined =
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const safePublishableKey: string = publishableKey ?? "default_publishable_key";
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -15,12 +19,21 @@ export default function RootLayout() {
     "Jakarta-Regular": require("../assets/fonts/PlusJakartaSans-Regular.ttf"),
     "Jakarta-SemiBold": require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
   });
+
+  if (!publishableKey) {
+    throw new Error("Missing publishable key");
+  }
+
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="(root)" options={{ headerShown: false }} /> */}
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="+not-found" /> */}
-    </Stack>
+    <ClerkProvider publishableKey={safePublishableKey}>
+      <ClerkLoaded>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="(root)" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="+not-found" /> */}
+        </Stack>
+      </ClerkLoaded>
+    </ClerkProvider>
   );
 }
