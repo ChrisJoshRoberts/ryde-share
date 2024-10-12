@@ -2,12 +2,12 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
+import { Slot } from "expo-router";
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-
-const publishableKey: string | undefined =
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-const safePublishableKey: string = publishableKey ?? "default_publishable_key";
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -21,11 +21,13 @@ export default function RootLayout() {
   });
 
   if (!publishableKey) {
-    throw new Error("Missing publishable key");
+    throw new Error(
+      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
+    );
   }
 
   return (
-    <ClerkProvider publishableKey={safePublishableKey}>
+    <ClerkProvider publishableKey={publishableKey}>
       <ClerkLoaded>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
