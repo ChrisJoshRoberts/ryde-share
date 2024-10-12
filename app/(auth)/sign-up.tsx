@@ -54,7 +54,7 @@ const SignUp = () => {
             onPress={onSignUpPress}
             className="mt-6"
           />
-          {/* OAuth */}
+          {/* Auth */}
           <OAuth />
           <Link
             href="/sign-in"
