@@ -11,6 +11,7 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 SplashScreen.preventAutoHideAsync();
 
 // adding comment to test config settings
+// Checking to see that this works
 
 export default function RootLayout() {
   const [loaded] = useFonts({
